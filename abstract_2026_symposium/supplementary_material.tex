@@ -1,0 +1,138 @@
+\documentclass[runningheads]{llncs}
+\usepackage[T1]{fontenc}
+\usepackage{booktabs}
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+\begin{document}
+
+\title{Supplementary Material: Scene-Level Narrative Verification for Detecting Manipulation in Short-Form Social Media Videos}
+\author{Andrii Hupalo \and Philip Shurpik}
+\institute{Ukrainian Catholic University, Lviv, Ukraine}
+\maketitle
+
+\section*{S1 Data Access and Scope}
+
+Due to NDA restrictions, raw proprietary videos cannot be publicly released. This supplement provides reproducibility details that do not disclose sensitive content: annotation schema, prompt template, evaluation protocol, and pilot metrics.
+
+\section*{S2 Annotation Schema}
+
+Each video/sample is processed into scene-level units with multimodal signals. Table~\ref{tab:schema} summarizes the fields used in pilot evaluation.
+
+\begin{table}[h]
+\centering
+\caption{Annotation and metadata schema used in pilot runs}
+\label{tab:schema}
+\footnotesize
+\begin{tabular}{ll}
+\toprule
+\textbf{Field} & \textbf{Description} \\
+\midrule
+video\_id & Unique sample identifier \\
+scene\_count & Number of detected scenes \\
+ocr\_texts & OCR-extracted on-screen text snippets \\
+reasoning & Model-generated explanation \\
+our\_score & Model manipulation score (0--100) \\
+commercial\_score & External weak-reference score (0--100) \\
+actor\_country & Coarse country tag (if available) \\
+video\_length & Duration in seconds \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section*{S3 Prompt Template (Pilot)}
+
+The pilot CV+LLM pipeline uses a structured scene-level prompt to enforce cross-modal checking rather than single-modality judgment.
+
+\begin{quote}
+You are given scene descriptions, OCR text, and audio transcript segments from a short video.
+Assess whether the narrative framing is coherent or misleading.
+Focus on cross-modal consistency:
+(1) visual vs. caption/overlay text,
+(2) visual vs. narration,
+(3) narration vs. overlay text.
+Return: manipulation score (0--100) and short justification.
+Do not assume facts not present in the provided evidence.
+\end{quote}
+
+\section*{S4 Evaluation Protocol}
+
+\textbf{Public pilot (FakeTT).} A balanced subset of 100 videos (50 fake, 50 real) is used for binary evaluation.
+
+\textbf{Proprietary pilot.} A 100-video subset is scored with the same pipeline and compared to an external weak-reference signal.
+
+\textbf{Important limitation.} Proprietary evaluation is weakly supervised and should be interpreted as preliminary evidence, not final benchmark performance.
+These pilot experiments are intended as feasibility and error-analysis baselines, not as final system benchmarks.
+
+\section*{S5 Pilot Metrics}
+
+\subsection*{S5.1 FakeTT (Ground-Truth Labels)}
+
+These FakeTT results represent an initial baseline under a lightweight configuration and are reported to document current behavior and failure patterns.
+
+\begin{table}[h]
+\centering
+\caption{Pilot metrics on FakeTT (n=100)}
+\label{tab:fakett}
+\footnotesize
+\begin{tabular}{lr}
+\toprule
+\textbf{Metric} & \textbf{Value} \\
+\midrule
+TP & 40 \\
+TN & 17 \\
+FP & 33 \\
+FN & 10 \\
+Accuracy & 0.57 \\
+Precision & 0.548 \\
+Recall & 0.80 \\
+F1 & 0.650 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The dominant error pattern is high false positives, indicating that the current setup tends to over-flag potentially manipulative framing.
+
+\subsection*{S5.2 Proprietary Pilot (Weak Supervision)}
+
+\begin{table}[h]
+\centering
+\caption{Pilot agreement metrics on proprietary subset (n=100)}
+\label{tab:prop}
+\footnotesize
+\begin{tabular}{lr}
+\toprule
+\textbf{Metric} & \textbf{Value} \\
+\midrule
+Mean external score & 35.9 \\
+Mean model score & 62.5 \\
+MAE (0--100 scale) & 37.6 \\
+Pearson correlation & 0.354 \\
+Samples with scene\_count = 0 & 69 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Agreement is currently weak (MAE 37.6, Pearson 0.354), which is expected at this stage given calibration mismatch between scoring scales, with the model systematically assigning higher scores (mean 62.5) than the external weak-reference signal (mean 35.9).
+
+The high number of samples with \texttt{scene\_count = 0} is a known preprocessing limitation in the current scene-segmentation setup (short clips, hard cuts, and compression artifacts) and is being addressed through threshold retuning and fallback segmentation.
+
+\section*{S6 Known Failure Modes}
+
+The dominant failure modes observed in pilot runs are:
+\begin{itemize}
+\item scene detection failures (including zero-scene outputs),
+\item OCR noise in low-quality overlays,
+\item incomplete ASR in multilingual/noisy audio,
+\item ambiguity in contextual framing for weakly supervised labels.
+\end{itemize}
+
+These failure modes motivate the next iteration and should be interpreted as engineering bottlenecks rather than limits of the narrative-verification formulation itself.
+
+\section*{S7 Dataset Reference}
+
+FakeTT provenance:
+Bu, Y., Sheng, Q., Cao, J., Qi, P., Wang, D., Li, J.: FakingRecipe: Detecting fake news on short video platforms from the perspective of creative process. In: Proceedings of the 32nd ACM International Conference on Multimedia (MM '24). pp. 1351--1360. ACM, New York (2024). \url{https://doi.org/10.1145/3664647.3680663}
+
+\end{document}

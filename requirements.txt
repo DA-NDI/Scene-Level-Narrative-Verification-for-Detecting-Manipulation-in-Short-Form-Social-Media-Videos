@@ -1,0 +1,56 @@
+# Core dependencies for video manipulation detection pipeline
+
+# API & LLM
+google-generativeai>=0.4.0
+openai>=1.0.0
+
+# Computer Vision
+opencv-python>=4.8.0
+Pillow>=10.0.0
+torch>=2.0.0
+torchvision>=0.15.0
+timm>=0.9.0  # PyTorch Image Models for ViT
+
+# Scene Detection
+scenedetect>=0.6.0
+
+# Text & OCR
+easyocr>=1.7.0
+pytesseract>=0.3.10
+
+# Audio
+moviepy>=1.0.3
+librosa>=0.10.0
+
+# Speech Recognition (Whisper)
+openai-whisper>=20230314
+
+# Vision-Language Models
+transformers>=4.30.0
+qwen-vl>=0.1.0  # Optional: for Qwen inference
+
+# Data processing
+numpy>=1.24.0
+pandas>=2.0.0
+scipy>=1.10.0
+
+# Utilities
+tqdm>=4.65.0
+pyyaml>=6.0
+python-dotenv>=1.0.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.14.0
+
+# Analysis
+scikit-learn>=1.3.0
+statsmodels>=0.14.0
+
+# Development (optional)
+pytest>=7.4.0
+black>=23.7.0
+flake8>=6.0.0
+ipython>=8.14.0
+jupyter>=1.0.0

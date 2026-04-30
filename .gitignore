@@ -1,0 +1,45 @@
+# Large datasets (exclude - link to resources instead)
+fakett/
+videos/
+FMNV/
+videos_manipulated/
+
+# Generated files
+*.pyc
+__pycache__/
+*.egg-info/
+.DS_Store
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary/output files
+*.pdf
+page-*.pdf
+*.aux
+*.bbl
+*.blg
+*.toc
+*.lof
+*.lot
+*.out
+*.xml
+
+# Sensitive/large experimental outputs
+evaluation_results/
+ablation_results/*.json
+ablation_results_fmnv/*.json
+papers/
+
+# Local data
+*.xlsx
+*.csv
+local_data/
+
+# API keys
+.env
+.env.local

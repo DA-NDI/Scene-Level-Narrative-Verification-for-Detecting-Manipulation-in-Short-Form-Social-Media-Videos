@@ -1,0 +1,30 @@
+{
+  "video_id": "07oqlilGKG0",
+  "title": "LA wildfires: Why the California fires are so intense",
+  "label": "false",
+  "duration": 105.07163333333334,
+  "frames": [
+    {
+      "position": "25%",
+      "time": "26.3s",
+      "ocr": "Palisades Fire | California | Global | NEWS",
+      "clip_authentic": 0.9287692904472351,
+      "clip_fake": 0.07123073935508728
+    },
+    {
+      "position": "50%",
+      "time": "52.5s",
+      "ocr": "LLi | LhU | Santa Ana Winds | SkyTracker Weather MINN | CARSON CITY | SAN FRANCISCO | [LAS VEGAS | S",
+      "clip_authentic": 0.46590620279312134,
+      "clip_fake": 0.5340937972068787
+    },
+    {
+      "position": "75%",
+      "time": "78.8s",
+      "ocr": "Wind Warnings | SkyTracker Weather | [LANCASTER | SANTA BARBARA | LOS ANGELES | RIVERSIDE | LONG BEA",
+      "clip_authentic": 0.9788451790809631,
+      "clip_fake": 0.02115483395755291
+    }
+  ],
+  "transcript": "The situation in California is quite unusual. Instead of fires, we are witnessing an unexpected surge of wildlife in the area. The recent weather patterns have led to an abundance of rain, which has r"
+}
