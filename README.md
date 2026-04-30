@@ -175,11 +175,13 @@ Video → Scene Detection → {OCR, ASR, Visual-Text Alignment}
 - Detects recontextualisation, misleading captions, audio-visual misalignment
 
 ### Fusion Module
-```
-M_fusion = w_a * M_pixel + w_n * M_narrative
-```
-- Weighted voting combines both streams
-- Best F1 = 0.699 (vs Config F narrative-only = 0.706)
+```text
+Stream A (Pixel Score) → injected into → Gemini Prompt (Stream B) → Unified Score
+Integrates streams by injecting the mean pixel artifact score directly into the Gemini reasoning prompt, delegating the joint decision to the model rather than using a post-hoc weighted formula
+
+Reduces false positives by 21% compared to narrative-only baseline
+
+Best F1 = 0.699 (vs Config F narrative-only = 0.706)
 
 ## Key Findings
 
@@ -202,10 +204,10 @@ M_fusion = w_a * M_pixel + w_n * M_narrative
 ### 4. Modality Ablation
 | Config | Modalities | F1 |
 |--------|-----------|-----|
-| A | Text only | 0.341 |
-| B | Text + CLIP | 0.482 |
-| C | Text + CLIP + Visual | **0.706** |
-| F | Gemini 3.1-flash-lite | **0.706** |
+| A | Text only (No vision, Gemini 2.5-flash) | 0.490 |
+| B | Text + Vision (Gemini 2.5-flash) | 0.622 |
+| C | Text + Vision + CLIP (Gemini 2.5-flash) | 0.626 |
+| F | Text + Vision (Gemini 3.1-flash-lite) | **0.706** |
 
 ## Usage Examples
 
