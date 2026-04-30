@@ -177,11 +177,12 @@ Video → Scene Detection → {OCR, ASR, Visual-Text Alignment}
 ### Fusion Module
 ```text
 Stream A (Pixel Score) → injected into → Gemini Prompt (Stream B) → Unified Score
-Integrates streams by injecting the mean pixel artifact score directly into the Gemini reasoning prompt, delegating the joint decision to the model rather than using a post-hoc weighted formula
+```
+- Integrates streams by injecting the mean pixel artifact score directly into the Gemini reasoning prompt, delegating the joint decision to the model rather than using a post-hoc weighted formula
 
-Reduces false positives by 21% compared to narrative-only baseline
+- Reduces false positives by 21% compared to narrative-only baseline
 
-Best F1 = 0.699 (vs Config F narrative-only = 0.706)
+- Best F1 = 0.699 (vs Config F narrative-only = 0.706)
 
 ## Key Findings
 
