@@ -328,8 +328,6 @@ MIT License — See LICENSE file
 ## Acknowledgments
 
 - Philip Shurpik (thesis supervision & LetsData infrastructure)
-- Anonymous industry partner (proprietary TikTok dataset)
-- StopFake & VoxCheck (fact-checking organizations using this work)
 - UCU Faculty of Applied Sciences
 
 ## Contributing
